@@ -15,7 +15,7 @@ int n, m, noTomato;
 queue < pair<int, int> > q;
 
 /**
-* ´Ù ÀÍ¾ú´ÂÁö Ã¼Å© ÇÔ¼ö
+* ë‹¤ ìµì—ˆëŠ”ì§€ ì²´í¬ í•¨ìˆ˜
 **/
 bool allRipe() {
 	int possible = m*n - noTomato;
@@ -27,12 +27,12 @@ bool allRipe() {
 				tomatoCnt++;
 		}
 	}
-	// ÀÍ¾î¾ß ÇÒ Åä¸¶Åä °¹¼ö == ÀÍÀº Åä¸¶Åä °¹¼ö
+	// ìµì–´ì•¼ í•  í† ë§ˆí†  ê°¯ìˆ˜ == ìµì€ í† ë§ˆí†  ê°¯ìˆ˜
 	return possible == tomatoCnt;
 }
 
 /**
-* bfs ÇÔ¼ö
+* bfs í•¨ìˆ˜
 **/
 int bfs() {
 	int nx, ny;
@@ -51,7 +51,7 @@ int bfs() {
 				nx = p.second + LR[i];
 				ny = p.first + UD[i];
 
-				// arr[][] ¹üÀ§ ³»¿¡ ¼ÓÇÏ´ÂÁö È®ÀÎ (x¹üÀ§ : 1 ~ n, y¹üÀ§ : 1 ~ m) 
+				// arr[][] ë²”ìœ„ ë‚´ì— ì†í•˜ëŠ”ì§€ í™•ì¸ (xë²”ìœ„ : 1 ~ n, yë²”ìœ„ : 1 ~ m) 
 				if (ny >= 1 && nx >= 1 && ny <= m && nx <= n && arr[ny][nx] == 0) {
 					arr[ny][nx] = 1;
 					q.push({ ny, nx });
@@ -59,11 +59,11 @@ int bfs() {
 			}
 			q.pop();
 
-			// ÀÍÈú ¼ö ÀÖ´Â Åä¸¶Åä¸¦ ÀüºÎ ÀÍÇû°í ÀüºÎ ÀÍ¾úÀ» °æ¿ì
+			// ìµí ìˆ˜ ìˆëŠ” í† ë§ˆí† ë¥¼ ì „ë¶€ ìµí˜”ê³  ì „ë¶€ ìµì—ˆì„ ê²½ìš°
 			if (q.size() == 0 && allRipe())
 				return day;
 
-			// ÀÍÈú ¼ö ÀÖ´Â Åä¸¶Åä´Â ÀüºÎ ÀÍÇûÁö¸¸ ¾È ÀÍÀº Åä¸¶Åä Á¸Àç
+			// ìµí ìˆ˜ ìˆëŠ” í† ë§ˆí† ëŠ” ì „ë¶€ ìµí˜”ì§€ë§Œ ì•ˆ ìµì€ í† ë§ˆí†  ì¡´ì¬
 			else if (q.size() == 0 && !allRipe())
 				return -1;
 		}
@@ -72,7 +72,7 @@ int bfs() {
 }
 
 /**
-* main ÇÔ¼ö
+* main í•¨ìˆ˜
 **/
 int main() {
 	cin >> n >> m;
@@ -82,13 +82,13 @@ int main() {
 			if (arr[i][j] == 1)
 				q.push({ i,j });
 			else if (arr[i][j] == -1)
-				noTomato++; // Åä¸¶Åä¸¦ ³ÖÀ» ¼ö ¾ø´Â Ä­
+				noTomato++; // í† ë§ˆí† ë¥¼ ë„£ì„ ìˆ˜ ì—†ëŠ” ì¹¸
 		}
 	}
 	if (q.size() == m * n - noTomato) {
-		cout << 0 << endl; // ¸ğµç Åä¸¶Åä ´Ù ÀÍ¾úÀ» °æ¿ì
+		cout << 0 << endl; // ëª¨ë“  í† ë§ˆí†  ë‹¤ ìµì—ˆì„ ê²½ìš°
 	} else {
-		int result = bfs(); // day Ãâ·Â
+		int result = bfs(); // day ì¶œë ¥
 		cout << result << endl;
 	}
 	return 0;
