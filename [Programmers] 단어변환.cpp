@@ -1,9 +1,12 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
+
 vector<int> ans;
+
 void dfs(string begin, string target, vector<string> words, string history, int n) {
     for (int i = 0; i < words.size(); i++) {
         string word = words[i];
@@ -42,7 +45,7 @@ int solution(string begin, string target, vector<string> words) {
     dfs(begin, target, words, begin, 0);
     if (!ans.empty()) {
         sort(ans.begin(), ans.end());
-        answer = ans.at(0);
+        answer = ans[0];
     }
     return answer;
 }
