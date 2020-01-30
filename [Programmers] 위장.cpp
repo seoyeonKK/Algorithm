@@ -20,9 +20,13 @@ int solution(vector<vector<string>> clothes) {
     
     // map for문 -> key로 value 접근하기
     // 파이썬 "for i in list:" 와 같은 코드
-    for(auto it = m.begin(); it != m.end(); it++){
-        answer *= (it->second + 1); // 안 입는 경우 1을 더해서 경우의 수 구하기
+    for (auto i : m) {
+        answer *= (i.second + 1); // 안 입는 경우 1을 더해서 경우의 수 구하기
     }
+    // 하단 문법처럼 사용해도 됨.
+//     for(auto it = m.begin(); it != m.end(); it++){
+//         answer *= (it->second + 1); // 안 입는 경우 1을 더해서 경우의 수 구하기
+//     }
 
     // 아무 것도 입지 않는 경우 1을 뺌
     answer--;
