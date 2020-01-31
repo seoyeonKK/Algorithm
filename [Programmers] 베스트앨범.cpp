@@ -29,7 +29,7 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
         p.push_back({ i.second, i.first });
     }
     
-    // 장르 재생 수 기준 sorting
+    // 장르 재생 수 기준 sorting (desc)
     sort(p.begin(), p.end(), comp1);
     
     // p vector 순서 대로 해당 장르에 맞는 plays와 idx를 pair<재생 수, 인덱스> vector에 삽입  
@@ -40,7 +40,7 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
             }
         }
         
-        // 음원 재생 수 기준 sorting 
+        // 음원 재생 수 기준 sorting (desc)
         sort(play.begin(), play.end(), comp2);
         
         // answer에 2개씩 삽입
