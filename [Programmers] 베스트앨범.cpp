@@ -48,7 +48,7 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
             if (k == play.size()) break; // 음원이 1개일 때 예외 처리
             answer.push_back(play[k].second);
         }
-        
+        // initialize
         play.clear();
     }
     
