@@ -20,7 +20,7 @@ vector<int> solution(vector<string> genres, vector<int> plays) {
     map<string, int> m;
     
     // <장르, 재생 수> map
-    for (int i = 0; i < genres.size; i++) {
+    for (int i = 0; i < genres.size(); i++) {
         m[genres[i]] += plays[i];
     }
     
