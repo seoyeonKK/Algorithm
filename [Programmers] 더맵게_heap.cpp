@@ -8,7 +8,7 @@ using namespace std;
 int solution(vector<int> scoville, int K) {
     int answer = 0;
     int first,second;
-    priority_queue<int, vector<int>, greater<int>> temp; // 우선 순위 queue로 heap구현
+    priority_queue<int, vector<int>, greater<int>> temp; // heap으로 우선 순위 queue
     
     for(int i = 0; i < scoville.size(); i++)
         temp.push(scoville[i]);
