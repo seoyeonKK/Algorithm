@@ -1,33 +1,39 @@
-// takes 30m - not complete 
-// remain 시간 계산하는 것
-// job이 끝났을 때 시간 시점에 pop g
- 
 #include <string>
 #include <vector>
-#include <queue>
+#include <algorithm>
+
 using namespace std;
+
+bool desc(const pair <int, int> &a, const pair <int, int> &b){
+  if(a.second == b.second)
+    return a.first < b.first;
+  else return a.second < b.second;
+}
 
 int solution(vector<vector<int>> jobs) {
     int answer = 0;
-    int remain = 0;
-    int i = 0;
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> temp;
+    int start = 0; 
+    int time = 0;
+    vector <pair <int, int>> disks;
     
-    while(!temp.empty()) {
-        if (i < jobs[i][0]) {
-            i++;
-            continue;
-        } // 최소힙 시작 시간이 현재 시간보다 느릴 때
-        else {
-            temp.push({ make_pair(jobs[i][1], jobs[i][0]) });
+    for (int i = 0; i < jobs.size(); i++) 
+        disks.push_back(make_pair(jobs[i][0], jobs[i][1]));
+    
+    sort(disks.begin(), disks.end(), desc);
+    
+    while (!disks.empty()) {
+        for (int i = 0; i < disks.size(); i++) {
+            if (disks[i].first <= start) {
+                start += disks[i].second;
+                time += start - disks[i].first;
+                disks.erase(disks.begin() + i);
+                break;
+            } 
+            if (i == disks.size()-1) start++;
         }
-        
-        if (i - remain == temp.top().first) {
-            answer = i - temp.top().second;
-            temp.pop();
-        }
-        i++;
     }
-    
-    return answer / jobs.size();
+ 
+    answer = time / jobs.size();
+ 
+    return answer;
 }
