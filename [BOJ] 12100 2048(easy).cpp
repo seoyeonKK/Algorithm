@@ -52,7 +52,7 @@ void move(int d) {
             }
             break;
 
-            // 서
+        // 서
         case 1:
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
@@ -82,7 +82,7 @@ void move(int d) {
             }
             break;
 
-            // 남
+        // 남
         case 2:
             for (int i = 0; i < N; i++) {
                 for (int j = N-1; j >= 0; j--) {
@@ -112,7 +112,7 @@ void move(int d) {
             }
             break;
 
-            // 북
+        // 북
         case 3:
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
@@ -146,7 +146,9 @@ void move(int d) {
 
 
 void dfs(int depth) {
+    
     cout << depth << endl;
+    
     // 5번 이동 시 return
     if (depth == 5) {
 
