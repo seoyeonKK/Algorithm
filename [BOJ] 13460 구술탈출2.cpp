@@ -114,13 +114,13 @@ int main(void) {
              */
             if (rx == bx && ry == by) {
                 switch (i) {
-                   case 0: // 남
+                   case 0: // 동
                         node.rx < node.bx ? rx-- : bx--; break;
-                    case 2: // 북
+                    case 2: // 서
                         node.rx < node.bx ? bx++ : rx++; break;
-                    case 1: // 동
+                    case 1: // 북
                         node.ry < node.by ? ry-- : by--; break;
-                    case 3: // 서
+                    case 3: // 남
                         node.ry < node.by ? by++ : ry++; break;
                 }
             }
