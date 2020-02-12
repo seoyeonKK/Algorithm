@@ -1,47 +1,47 @@
 #include <string>
 #include <vector>
 #include <queue>
-#include <algorithm>
-#include <list>
- 
+#include <iostream>
 using namespace std;
- 
+
+int adjacent[20001][20001];
+bool visit[20001];
+int dist[20001];
+queue<int> q;
+
 int solution(int n, vector<vector<int>> edge) {
+    int max = 0;
     int answer = 0;
-    vector<vector<int>> graph(n+1, vector<int> ());
-    vector<bool> visit(n+1, false);
-    vector<int> dist(n+1, 0);
-    queue<int> q;
     
-    for (int i = 0; i < edge.size(); i++) {
-        graph[edge[i][0]].push_back(edge[i][1]);
-        graph[edge[i][1]].push_back(edge[i][0]);
+    for(int i = 0; i < edge.size(); i++) {
+        adjacent[edge[i][0]][edge[i][1]]=1;
+        adjacent[edge[i][1]][edge[i][0]]=1;
     }
-    
+
+    visit[1]=true;
     q.push(1);
-    visit[1] = true;
-    dist[1] = 0;
+    dist[1]=0;
     
-    while (!q.empty()) {
-        int start = q.front();
-        q.pop();
+    while(!q.empty()) {
         
-        for (int i = 0; i < graph[start].size(); i++) {
-           if (visit[graph[start][i]] == false) {
-                q.push(graph[start][i]);
-                visit[graph[start][i]] = true;
-                dist[graph[start][i]] = dist[start] + 1;
-           }
+        int idx = q.front();
+        q.pop();       
+        
+        for(int i = 2; i <= n; i++) {
+            if(adjacent[idx][i] == 1 && !visit[i]) {
+                q.push(i);
+                visit[i]=true;
+                dist[i] = dist[idx] + 1;
+                
+                if(max < dist[i]) {
+                    max = dist[i];
+                }
+            }
         }
     }
-    
-    sort(dist.begin(), dist.end());
-    int max = dist.back();
-    
-    for (int i = 1; i <= n; i++) {
-        if (dist[i] == max) {
-            answer++;
-        }
+
+    for(int i = 1; i <= n; i++) {
+        if(max == dist[i]) answer++;
     }
     
     return answer;
