@@ -5,7 +5,6 @@
 using namespace std;
 
 int adjacent[20001][20001];
-bool visit[20001];
 int dist[20001];
 queue<int> q;
 
@@ -28,9 +27,8 @@ int solution(int n, vector<vector<int>> edge) {
         q.pop();       
         
         for(int i = 2; i <= n; i++) {
-            if(adjacent[idx][i] == 1 && !visit[i]) {
+            if(adjacent[idx][i] == 1 && !dist[i]) {
                 q.push(i);
-                visit[i]=true;
                 dist[i] = dist[idx] + 1;
                 
                 if(max < dist[i]) {
