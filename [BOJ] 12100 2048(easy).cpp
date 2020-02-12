@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
 #define MAX_SIZE 20
 using namespace std;
 
@@ -146,17 +147,14 @@ void move(int d) {
 
 
 void dfs(int depth) {
-    
-    cout << depth << endl;
-    
+   
     // 5번 이동 시 return
     if (depth == 5) {
 
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                ans = Max(ans, block[i][j]); // Max값 찾기
+                ans = max(ans, block[i][j]); // Max값 찾기
 
-        cout << "탈출" << endl;
         return;
     }
 
