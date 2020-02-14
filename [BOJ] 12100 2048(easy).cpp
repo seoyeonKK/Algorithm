@@ -8,8 +8,6 @@ int N;
 int block[MAX_SIZE][MAX_SIZE];
 int ans;
 
-int Max(int x, int y) { return x < y ? y : x; }
-
 // copy from arr2 to arr1
 void copy(int(*arr1)[MAX_SIZE], int(*arr2)[MAX_SIZE]) {
     for (int i = 0; i < N; i++){
