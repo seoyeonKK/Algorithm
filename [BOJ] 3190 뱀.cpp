@@ -8,8 +8,7 @@ using namespace std;
 struct Snake {
     int x;
     int y;
-    int direct;
-    Snake(int a, int b, int c) : x(a), y(b), direct(c) {};
+    Snake(int a, int b) : x(a), y(b) {};
 };
 
 int map[MAX][MAX] = {-1, };
@@ -24,6 +23,7 @@ int move() {
     char d;
     int nx = 1;
     int ny = 1;
+    int direction = 0;
 
     while (1) {
         Snake snake = q.front();
@@ -32,14 +32,17 @@ int move() {
         d = rotation.front().second;
 
         // 매초 이동
-        if (snake.direct == 0) {
-            nx++;
-        } else if (snake.direct == 1) {
+        if (direction == 0) {
             ny++;
-        } else if (snake.direct == 2) {
-            nx--;
-        } else if (snake.direct == 3) {
+        }
+        else if (direction == 1) {
+            nx++;
+        }
+        else if (direction == 2) {
             ny--;
+        }
+        else if (direction == 3) {
+            nx--;
         }
 
         if (nx > N || nx < 1 || ny > N || ny < 1) break;
@@ -49,6 +52,7 @@ int move() {
             visit[snake.x][snake.y] = 0;
             q.pop();
         }
+        else if (map[nx][ny] == 1) map[nx][ny] = 0;
 
         visit[nx][ny] = 1;
 
@@ -56,18 +60,15 @@ int move() {
         if (timer == s) {
             rotation.pop();
             if (d == 'D') {
-                q.push(Snake(nx, ny, (snake.direct + 1) % 4));
+                direction = (direction+1) % 4;
             } else if (d == 'L') {
-                q.push(Snake(nx, ny, (snake.direct + 3) % 4));
+                direction = (direction+3) % 4;
             }
         }
-        else {
-            q.push(Snake(nx, ny, snake.direct));
-        }
 
+        q.push(Snake(nx, ny));
         timer++;
     }
-
     return timer;
 }
 
@@ -97,7 +98,7 @@ int main() {
         rotation.push({seconds, direction});
     }
 
-    q.push( Snake(1, 1, 0) );
+    q.push( Snake(1, 1) );
 
     cout << move() << endl;
 
