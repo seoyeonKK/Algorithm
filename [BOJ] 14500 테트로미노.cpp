@@ -3,12 +3,11 @@
 #define MAX_SIZE 500
 using namespace std;
 
-int N, M;
+int N, M, MAX = 0;
 int map[MAX_SIZE][MAX_SIZE] = {0, };
 bool visited[MAX_SIZE][MAX_SIZE] = {0, };
 int dx[] = {1, -1, 0, 0};
 int dy[] = {0, 0, 1, -1};
-int MAX;
 
 bool inRange(int x, int y) {
     if (x < 0 || x >= N || y < 0  || y >= M)
@@ -34,7 +33,6 @@ void move(int x, int y, int count, int sum) {
             visited[nx][ny] = 0;
         }
     }
-
 }
 
 void specialShape(int x, int y) {
@@ -74,7 +72,7 @@ int main () {
     }
 
     for (int i = 0; i < N*M; i++) {
-        int x = i / N;
+        int x = i / M;
         int y = i % M;
 
         visited[x][y] = 1;
@@ -83,10 +81,9 @@ int main () {
         specialShape(x, y);
 
         visited[x][y] = 0;
-
     }
 
-    cout << MAX;
+    cout << MAX << endl;
 
     return 0;
 }
