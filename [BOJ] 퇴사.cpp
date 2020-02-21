@@ -4,8 +4,6 @@
 using namespace std;
 
 int N, period, cost;
-int total = 0;
-pair<int, int> p;
 int dp[16] = {0, };
 vector<pair<int, int>> schedule;
 
@@ -20,15 +18,16 @@ int main () {
         cin >> period >> cost;
 
         schedule.push_back({ period, cost });
-        dp[i] = cost;
+        dp[i] = cost; // cost 저장
     }
 
     for (int i = 1; i < N; i++) {
         for (int j = 0; j < i; j++) {
 
-            if (i - j >= schedule[i].first) {
+            // i = 기준일
+            // j = 0 ~ (기준일 - 1)
+            if (i - j >= schedule[j].first)
                 dp[i] = max(schedule[i].second + dp[j], dp[i]);
-            }
 
         }
     }
@@ -36,7 +35,7 @@ int main () {
     int max = 0;
 
     for (int i = 0; i < N; i++) {
-        if (i + schedule[i].first < N) {
+        if (i + schedule[i].first <= N) {
             if (max < dp[i]) {
                 max = dp[i];
             }
