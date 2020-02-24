@@ -6,6 +6,8 @@ using namespace std;
 int N, M, MAX = 0;
 int map[MAX_SIZE][MAX_SIZE] = {0, };
 bool visited[MAX_SIZE][MAX_SIZE] = {0, };
+
+// 동 서 북 남
 int dx[] = {1, -1, 0, 0};
 int dy[] = {0, 0, 1, -1};
 
@@ -16,13 +18,16 @@ bool inRange(int x, int y) {
         return true;
 }
 
+// 'ㅗ', 'ㅏ', 'ㅓ', 'ㅜ' 를 제외한 모든 모양에 해당되는 dfs 함수
 void move(int x, int y, int count, int sum) {
-
+    
+    // 조각 4개가 모였다면 max 업뎃
     if (count == 4) {
         MAX = max(MAX, sum);
         return;
     }
 
+    // 동 서 남 북 dfs
     for (int i = 0; i < 4; i++) {
         int nx = x + dx[i];
         int ny = y + dy[i];
@@ -35,11 +40,13 @@ void move(int x, int y, int count, int sum) {
     }
 }
 
+// 'ㅗ', 'ㅏ', 'ㅓ', 'ㅜ' 에 해당되는 dfs로 처리 불가한 모양
 void specialShape(int x, int y) {
     for (int i = 0; i < 4; i++){
         int sum = map[x][y];
         bool flag = true;
-
+        
+        // 중심을 제외하고 상, 하, 좌, 우 중 3개 
         for (int j = 0; j < 3; j++) {
             int nx = x + dx[(i+j) % 4];
             int ny = y + dy[(i+j) % 4];
@@ -72,15 +79,15 @@ int main () {
     }
 
     for (int i = 0; i < N*M; i++) {
-        int x = i / M;
-        int y = i % M;
+        int x = i / M; // 행
+        int y = i % M; // 열
 
         visited[x][y] = 1;
 
-        move(x, y, 1, map[x][y]);
-        specialShape(x, y);
+        move(x, y, 1, map[x][y]); // dfs start
+        specialShape(x, y); // specialShape start
 
-        visited[x][y] = 0;
+        visited[x][y] = 0; // dfs 후 visit[][] 0 처리
     }
 
     cout << MAX << endl;
