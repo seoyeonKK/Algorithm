@@ -10,10 +10,10 @@ int copyMap[8][8];
 int result = 0;
 vector<pair<int, int>> position;
 
-int dx[4] = {1, -1, 0, 0};
-int dy[4] = {0, 0, 1, -1};
+int dx[] = {1, -1, 0, 0};
+int dy[] = {0, 0, 1, -1};
 
-int BFS() {
+void BFS() {
     queue <pair <int, int>> que;
 
     for (int i = 0; i < position.size(); i++)
@@ -26,7 +26,7 @@ int BFS() {
 
         que.pop();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; ++i) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
@@ -45,16 +45,16 @@ int BFS() {
 
     result = max(size, result);
 
-    return result;
+    return;
 }
 
-int wall(int cnt) {
-    if (cnt >= 3) {
+void wall(int cnt) {
+    if (cnt == 3) {
         for (int i = 0; i < N; i++)
             for (int j = 0; j < M; j++)
                 copyMap[i][j] = map[i][j];
-
-        return BFS();
+        BFS();
+        return;
     }
 
     for (int i = 0; i < N; i++) {
@@ -78,9 +78,7 @@ int main () {
         for (int j = 0; j < M; j++) {
             cin >> map[i][j];
 
-            if (map[i][j] == 2) {
-                position.push_back({i, j});
-            }
+            if (map[i][j] == 2) position.push_back({i, j});
         }
     }
 
