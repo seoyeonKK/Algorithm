@@ -16,13 +16,13 @@ void construct() {
             if (!visit[i][j]) {
                 if (1 == map[i][j] - map[i][j+1]) {
                     for (int k = 1; k < L; k++) {
-                        if (visit[i][j + k] || (j + k >= N) || (map[i][j + k] != map[i][j + 1])) {
+                        if (visit[i][j + k + 1] || (j + k + 1>= N) || (map[i][j + k + 1] != map[i][j + 1])) {
                             flag = 1;
                             break;
                         }
 
-                        visit[i][j] = 1;
-                        visit[i][j + k] = 1;
+                        visit[i][j + 1] = 1;
+                        visit[i][j + k + 1] = 1;
                     }
                 }
                 else if (-1 == map[i][j] - map[i][j+1]) {
@@ -53,24 +53,25 @@ void construct() {
     }
 
     cout << "========" << endl;
+
     for (int j = 0; j < N; j++) {
         for (int i = 0; i < N; i++) {
             flag = 0;
 
             if (!visit[i][j]) {
-                cout << j << i << endl;
                 if (1 == map[i][j] - map[i + 1][j]) {
                     for (int k = 1; k < L; k++) {
-                        if (visit[i + k][j] || (i + k >= N) || (map[i + k][j] != map[i + 1][j])) {
+                        if (visit[i + k + 1][j] || (i + k + 1 >= N) || (map[i + k + 1][j] != map[i + 1][j])) {
                             flag = 1;
                             break;
                         }
 
-                        visit[i][j] = 1;
-                        visit[i + k][j] = 1;
+                        visit[i + 1][j] = 1;
+                        visit[i + k + 1][j] = 1;
                     }
                 }
                 else if (-1 == map[i][j] - map[i + 1][j]) {
+
                     for (int k = 1; k < L; k++) {
                         if (visit[i - k][j] || (i - k < 0) || (map[i - k][j] != map[i][j])) {
                             flag = 1;
@@ -94,6 +95,7 @@ void construct() {
         }
 
         if (flag == 0) {
+            cout << j << endl;
             ans++;
         }
     }
