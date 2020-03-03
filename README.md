@@ -1,2 +1,2 @@
 # Algorithm
-### 1일 1알고리즘
+### 1Day-1Algorithm
