@@ -30,7 +30,8 @@ void row() {
                     visited[i][j + k + 1] = 1;
                 }
             }
-                // 오르막 길일 때
+            
+            // 오르막 길일 때
             else if (-1 == map[i][j] - map[i][j + 1]) {
                 for (int k = 0; k < L; k++) {
                     if (visited[i][j - k] || (j - k < 0) || (map[i][j - k] != map[i][j])) {
@@ -43,7 +44,8 @@ void row() {
                     visited[i][j - k] = 1;
                 }
             }
-                // 경사가 2이상 차이날 때
+            
+            // 경사가 2이상 차이날 때
             else if (map[i][j] != map[i][j + 1]) {
                 flag = 1;
                 break;
