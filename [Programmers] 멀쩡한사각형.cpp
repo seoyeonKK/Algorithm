@@ -1,9 +1,8 @@
 using namespace std;
 
-long long solution(int w,int h)
-{
+long long solution(int w,int h) {
   int gcd;
-	long long sum = (long long)w * (long long)h;
+  long long sum = (long long)w * (long long)h;
 	
   if (w < h) {
       for (int i = w; i > 0; i--) {
@@ -22,5 +21,5 @@ long long solution(int w,int h)
       }
   }
 
-	return sum - gcd * ((w / gcd) + (h / gcd) - 1);
+  return sum - gcd * ((w / gcd) + (h / gcd) - 1);
 }
