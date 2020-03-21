@@ -1,43 +1,36 @@
-#include <string>
+#include <cmath>
+#include <cstdio>
 #include <vector>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
-    int answer = 0;
-    vector<int> student(n);
+    int answer = n - lost.size();
     
-    for(int i = 0; i < lost.size(); i++){
-        student[ lost[i]-1 ] += -1;
-    }
-    
-    for(int i = 0; i < reserve.size(); i++){
-        student[ reserve[i]-1 ] += 1;
-    }
-    
-    for(int i=0; i < student.size(); i++){
-        if( student[i] == 1){
-            if( i - 1 > -1){
-                if( student[i-1] == -1 ){
-                    student[i-1] += 1;
-                    student[i] += -1;
-                }
-            }
-        }
-        
-        if( student[i] == 1){
-            if( i + 1 < student.size()){
-                if( student[i+1] == -1 ){
-                    student[i+1] += 1;
-                    student[i] += -1;
-                }
+    // 체육복 여유 분이 있지만 잃어버린 경우
+    for (int i = 0; i < reserve.size(); i++) {
+        for (int j = 0; j < lost.size(); j++) {
+            if (lost[j] == reserve[i]) {
+                reserve.erase(reserve.begin()+i);
+                lost.erase(lost.begin()+j);
+                answer++;              
+                i--;
+                break;
             }
         }
     }
     
-    for(int i = 0; i< student.size(); i++){
-        if( student[i] == 0 || student[i] == 1)
-            ++answer;
+    // 여유 분의 체육복을 양 옆 학생에게 빌려주는 경우
+    for (int i = 0; i < lost.size(); i++) {
+        for (int j = 0; j < reserve.size(); j++) {
+            if (lost[i]+1 == reserve[j] || lost[i]-1 == reserve[j]) {
+                reserve.erase(reserve.begin()+j);
+                answer++;
+                break;
+            }
+        }    
     }
     
     return answer;
