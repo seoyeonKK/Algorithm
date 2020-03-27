@@ -3,15 +3,19 @@
 using namespace std;
 
 long long solution(int n) {
-	long long a = 1;
-	long long b = 1;
-	long long temp;
-	if (n == 1)
-		return 1;
-	for (int i = 2; i <= n; i++) {
-		temp = (a + b) % 1234567;
-		a = b;
-		b = temp;
-	}	
-	return b % 1234567;
+    long long answer = 0;
+    int div = 1234567;
+    long long a = 1;
+    long long b = 2;
+    
+    if (n == 1) return a; 
+    else if (n == 2) return b;
+    
+    for (int i = 3; i <= n; i++) {
+        answer = (a + b) % div;
+        a = b;
+        b = answer;
+    }
+    
+    return answer;
 }
