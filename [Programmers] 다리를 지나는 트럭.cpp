@@ -4,7 +4,7 @@
 using namespace std;
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
-    queue<int> arrive_truck;
+    queue<int> truck_on_bridge;
     int sum = 0;
     int truckIdx = 0;
     int time = 0;
@@ -13,9 +13,9 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
         time++;
         
         // 큐 사이즈 = 다리길이
-        if(arrive_truck.size() == bridge_length) {
-            sum -= arrive_truck.front();
-            arrive_truck.pop();
+        if(truck_on_bridge.size() == bridge_length) {
+            sum -= truck_on_bridge.front();
+            truck_on_bridge.pop();
         }
         
         // 트럭의 무게가 다리의 무게보다 작으면, 트럭을 삽입
@@ -27,13 +27,13 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
                 break;
             }
             
-            arrive_truck.push(truck_weights[truckIdx]);
+            truck_on_bridge.push(truck_weights[truckIdx]);
             sum += truck_weights[truckIdx];
             truckIdx++;
         }
         // 트럭의 무게가 다리의 무게보다 크면, 0을 삽입해서 트럭을 도착점으로 민다
         else {
-            arrive_truck.push(0);
+            truck_on_bridge.push(0);
         }    
     }
     
