@@ -11,6 +11,7 @@ vector<int> solution(int n, vector<string> words) {
     int i = 1;
     wordsList.push_back(words[0]);
     char prev = words[0][words[0].length()-1];
+    people[0]++;
     
     while(1) {
         if (wordsList.size() == words.size()) {
@@ -18,25 +19,26 @@ vector<int> solution(int n, vector<string> words) {
             answer.push_back(0);
             return answer;
         }
+        
         for (int j = 0; j < wordsList.size(); j++) {
             if (words[i] == wordsList[j]) {
-                answer.push_back(i % (n+1)+1);
-                answer.push_back(people[i % (n+1)]);
+                answer.push_back(i % n + 1);
+                answer.push_back(++people[i % n]);
                 return answer;
             }
         }
         
-        if (words[i].length() > 1 && words[i][0] != prev) {
-            people[i % (n+1)]++;
+        if (words[i].length() > 1 && words[i][0] == prev) {
+            people[i % n]++;
             wordsList.push_back(words[i]);
+            prev = words[i][words[i].length()-1];
             i++;
         }
         else {
-            answer.push_back(i % (n+1) +1);
-            answer.push_back(people[i % (n+1)]);
+            answer.push_back(i % n + 1);
+            answer.push_back(++people[i % n]);
             return answer;
         }
-        
     }
 
     return answer;
