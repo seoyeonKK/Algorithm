@@ -2,16 +2,15 @@
 #include <vector>
 using namespace std;
 
-int N;
-
 int main () {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-
-    cin >> N;
-
+    
+    int N;
     vector<string> v;
     int answer = 0;
+    
+    cin >> N;
 
     for (int i = 0; i < N; i++) {
         string s;
@@ -19,9 +18,10 @@ int main () {
 
         v.push_back(s);
 
-        char before = v[i][0];
         vector<char> visited;
         bool flag = true;
+        char before = v[i][0];
+        visited.push_back(before);
 
         for (int j = 1; j < v[i].size(); j++) {
             if (before != v[i][j]) {
@@ -41,6 +41,7 @@ int main () {
         }
         if (flag) answer++;
     }
+    
     cout << answer;
 
     return 0;
