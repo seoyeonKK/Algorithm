@@ -1,5 +1,5 @@
 /*
- * 2019 SDS 입과테스트 2번 스도쿠
+ * 2019 입과테스트 2번 스도쿠
  */
 #include <iostream>
 #include <algorithm>
