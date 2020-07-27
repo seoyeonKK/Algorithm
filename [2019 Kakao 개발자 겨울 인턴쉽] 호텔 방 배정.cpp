@@ -1,11 +1,11 @@
-#include 
-#include 
-#include 
+#include <string>
+#include <vector>
+
 using namespace std;
 
-vector solution(long long k, vector room_number){
-    vector answer;
-    vector realRoom(k,0);
+vector<long long> solution(long long k, vector<long long> room_number) {
+    vector<long long> answer;
+    vector<long long> realRoom(k,0);
 
     for(int i=0; i<room_number.size(); i++){
         int want = room_number[i];
@@ -24,4 +24,5 @@ vector solution(long long k, vector room_number){
         }
     }
     return answer;
+
 }
