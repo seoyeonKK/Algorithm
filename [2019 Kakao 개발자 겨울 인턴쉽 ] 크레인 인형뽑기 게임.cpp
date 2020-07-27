@@ -1,12 +1,12 @@
-#include 
-#include 
-#include 
+#include <string>
+#include <vector>
+
 using namespace std;
 
-int solution(vector<vector> board, vector moves){
+int solution(vector<vector<int>> board, vector<int> moves) {
 
     int sero = 0;
-    vector baguni;
+    vector<int> baguni;
     int answer = 0;
     //전체 묶어주기 시작 루틴 하나
     for(int i = 0; i< moves.size(); i++){
@@ -24,8 +24,8 @@ int solution(vector<vector> board, vector moves){
                     baguni.push_back(doll); //다른 인형이면 바구니 추가
                     break;
             }
-
         }
     }
     return answer;
+
 }
