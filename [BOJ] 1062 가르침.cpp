@@ -10,9 +10,9 @@ string word[51];
 int getCount() {
     int res = 0;
 
-    for (int i=0; i<N; i++){
+    for (int i = 0; i < N; i++){
         int cnt = 0;
-        for (int j=0; j<word[i].size(); j++){
+        for (int j = 0; j < word[i].size(); j++){
             if (alphaVisited[word[i][j]-97]) {
                 cnt++;
             }
@@ -33,7 +33,7 @@ void dfs(int start, int count) {
         return;
     }
 
-    for (int i=start; i<26; i++){
+    for (int i = start; i < 26; i++){
         if (!alphaVisited[i]){
             alphaVisited[i] = true;
             dfs(i, count+1);
@@ -48,7 +48,7 @@ int main () {
 
     cin >> N >> K;
 
-    for (int i=0; i<N; i++) {
+    for (int i = 0; i < N; i++) {
         cin >> word[i];
     }
 
