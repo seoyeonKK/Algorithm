@@ -4,7 +4,7 @@ using namespace std;
 
 int N;
 vector<int> num;
-bool c[20*1000000+10];
+bool c[20*1000000+10]; // 20*100000인데 넓게 쓰려고
 
 void solve(int idx, int sum) {
     if (idx == N) {
