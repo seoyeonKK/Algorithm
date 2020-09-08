@@ -1,6 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <cstdio>
 #include <tuple>
 using namespace std;
 int arr[1000][1000];
@@ -13,24 +12,24 @@ int N, M, L;
 void bfs() {
     while (!q.empty()) {
         int x, y, z, night;
-        tie(x,y,z, night) = q.front();
+        tie(x, y, z, night) = q.front();
         q.pop();
         for (int k = 0; k < 4; k++) {
             int nx = x + dx[k];
             int ny = y + dy[k];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
-            if (arr[nx][ny] == 0 && dist[nx][ny][z][1-night] == 0) {
-                dist[nx][ny][z][1-night] = dist[x][y][z][night] + 1;
-                q.push({ nx, ny, z, 1-night });
+            if (arr[nx][ny] == 0 && dist[nx][ny][z][1 - night] == 0) {
+                dist[nx][ny][z][1 - night] = dist[x][y][z][night] + 1;
+                q.push(make_tuple(nx, ny, z, 1 - night));
             }
-            if (night == 0 && z+1 <= L && arr[nx][ny] == 1 && dist[nx][ny][z+1][1-night] == 0) {
-                dist[nx][ny][z+1][1-night] = dist[x][y][z][night] + 1;
-                q.push({ nx, ny, z+1, 1-night });
+            if (night == 0 && z + 1 <= L && arr[nx][ny] == 1 && dist[nx][ny][z + 1][1 - night] == 0) {
+                dist[nx][ny][z + 1][1 - night] = dist[x][y][z][night] + 1;
+                q.push(make_tuple(nx, ny, z + 1, 1 - night));
             }
         }
-        if (dist[x][y][z][1-night] == 0) {
-            dist[x][y][z][1-night] = dist[x][y][z][night] + 1;
-            q.push({x, y, z, 1-night });
+        if (dist[x][y][z][1 - night] == 0) {
+            dist[x][y][z][1 - night] = dist[x][y][z][night] + 1;
+            q.push(make_tuple(x, y, z, 1 - night));
         }
     }
 }
@@ -40,11 +39,11 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
-            cin >> arr[i][j];
+            scanf("%1d", &arr[i][j]);
         }
     }
     dist[0][0][0][0] = 1;
-    q.push(make_tuple(0,0,0,0));
+    q.push({0,0,0,0});
     bfs();
 
     int ans = -1;
