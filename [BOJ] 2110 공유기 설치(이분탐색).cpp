@@ -1,11 +1,13 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
-bool possible(vector<int> &a, int c, int x) {
+
+// 공유기 설치가 가능한지 체크하는 함수
+bool possible(vector<int> &h, int c, int x) { // possible(집의 위치, 공유기 개수, 가장 인접한 두 공유기 사이 거리)
     int cnt = 1;
-    int last = a[0];
-    for (int house : a) {
+    int last = h[0];
+    for (int house : h) {
         if (house - last >= x) {
             cnt += 1;
             last = house;
@@ -13,33 +15,33 @@ bool possible(vector<int> &a, int c, int x) {
     }
     return cnt >= c;
 }
+
 int main() {
     int n, c;
     cin >> n >> c;
-
-    vector<int> a(n);
-    for (int i=0; i<n; i++) {
-        cin >> a[i];
+    vector<int> house(n);
+    for (int i = 0; i < n; i++) {
+        cin >> house[i];
     }
+    sort(house.begin(), house.end());
 
-    sort(a.begin(), a.end());
-
-    int l = 1;
-    int r = a[n-1] - a[0];
-
+    int l = 1; // 가장 인접한 두 공유기 사이 거리 범위 : 1 < mid < house[n-1] - house[0]
+    int r = house[n-1] - house[0];
     int ans = l;
     while(l <= r) {
         int mid = (l+r)/2;
-        if (possible(a, c, mid)) {
+        if (possible(house, c, mid)) {
             if (ans < mid) {
                 ans = mid;
             }
             l = mid + 1;
-        } else {
+        } 
+        else {
             r = mid - 1;
         }
     }
 
-    cout << ans << '\n';
+    cout << ans << endl;
+
     return 0;
 }
