@@ -7,7 +7,7 @@ int main () {
     cin >> n >> k;
 
     while(true) {
-        int num = (n/k) * k; // n보다 작지만 가장 가까운 n의 배수
+        int num = (n/k) * k; // n보다 작지만 가장 가까운 k의 배수
         result += (n - num); // 1로 뺄 횟수 더하기
         n = num;
 
