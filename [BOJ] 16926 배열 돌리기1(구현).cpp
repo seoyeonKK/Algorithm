@@ -4,7 +4,7 @@
 using namespace std;
 
 int n, m, t;
-// 남 동 북 서
+// 동 남 서 북 
 int dx[] = {0,1,0,-1};
 int dy[] = {1,0,-1,0};
 
@@ -38,6 +38,13 @@ void rotate(vector<vector<int>>& arr) {
             }
         }
         arr[i+1][i] = temp; //a10 = a00
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
     }
 }
 
@@ -55,12 +62,6 @@ int main () {
         rotate(arr);
     }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
-    }
 
     return 0;
 }
