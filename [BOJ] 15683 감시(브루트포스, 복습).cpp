@@ -63,11 +63,12 @@ int go(vector<vector<int>> &a, vector<tuple<int, int, int>> &cctv, int idx, vect
         }
         return cnt;
     }
-    // 사각지대 넓이 중 최댓값 구하기
     int ans = 100;
+    // cctv 방향 정하고 재귀함수 돌리기
     for (int i = 0; i < 4; i++) {
         dirs[idx] = i;
         int temp = go(a, cctv, idx+1, dirs);
+        // 사각지대 넓이 중 최댓값 구하기
         if (ans > temp) {
             ans = temp;
         }
